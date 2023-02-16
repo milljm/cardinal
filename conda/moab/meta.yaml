@@ -1,0 +1,49 @@
+{% set build = 0 %}
+{% set strbuild = "build_" + build|string %}
+{% set version = "1.0.0" %}
+
+package:
+  name: cardinal-moab
+  version: {{ version }}
+
+source:
+  - path: ../../contrib/moab
+
+build:
+  number: {{ build }}
+  string: {{ strbuild }}
+  skip: true  # [win]
+  script_env:
+    - MOOSE_JOBS
+  run_exports:
+    - {{ pin_subpackage('cardinal-moab', max_pin='x.x') }}
+
+requirements:
+  build:
+    - {{ cardinal_nekrs }}
+    - cmake
+    - pkg-config
+  run:
+    - {{ cardinal_nekrs }}
+
+test:
+  requires:
+    - {{ cardinal_nekrs }}
+  commands:
+    - mbhonodes -h
+
+about:
+  home: https://bitbucket.org/fathomteam/moab/src/master/
+  license: LGPLv3
+  license_file: LICENSE
+  summary: >
+    The Mesh-Oriented datABase MOAB is a component for representing and evaluating mesh data. MOAB
+    can store structured and unstructured mesh, consisting of elements in the finite element “zoo”
+    plus polygons and polyhedra. The functional interface to MOAB is simple yet powerful, allowing
+    the representation of many types of metadata commonly found on the mesh. MOAB is optimized for
+    efficiency in space and time, based on access to mesh in chunks rather than through individual
+    entities, while also versatile enough to support individual entity access.
+
+extra:
+  recipe-maintainers:
+    - milljm
