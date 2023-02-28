@@ -1,4 +1,4 @@
-{% set build = 0 %}
+{% set build = 2 %}
 {% set strbuild = "build_" + build|string %}
 {% set version = "1.0.0" %}
 
@@ -45,6 +45,10 @@ test:
     - {{ moose_libmesh }}
   commands:
     - cardinal-opt --help
+    - nekrs --help
+    - openmc --help
+    - ray_fire_test -h
+    - mbhonodes -h
 
 about:
   home: https://cardinal.cels.anl.gov/index.html

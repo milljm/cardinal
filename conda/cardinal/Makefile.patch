@@ -1,11 +1,11 @@
 diff --git a/Makefile b/Makefile
-index c0810933..25f52f40 100644
+index c0810933..d939a7c5 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -281,15 +281,6 @@ endif
  # External apps
  # ======================================================================================
-
+ 
 -# libmesh_CXX, etc, were defined in build.mk
 -export CXX := $(libmesh_CXX)
 -export CC  := $(libmesh_CC)
@@ -16,14 +16,19 @@ index c0810933..25f52f40 100644
 -export CPPFLAGS := $(libmesh_CPPFLAGS)
 -export LDFLAGS := $(libmesh_LDFLAGS)
  export LIBS := $(libmesh_LIBS)
-
+ 
  export CARDINAL_DIR
-@@ -351,7 +342,7 @@ endif
+@@ -351,11 +342,11 @@ endif
  ADDITIONAL_LIBS := -L$(CARDINAL_DIR)/lib $(CC_LINKER_SLFLAG)$(CARDINAL_DIR)/lib
-
+ 
  ifeq ($(ENABLE_NEK), yes)
 -  ADDITIONAL_LIBS += -L$(NEKRS_LIBDIR) -lnekrs -locca $(CC_LINKER_SLFLAG)$(NEKRS_LIBDIR)
 +  ADDITIONAL_LIBS += -L$(NEKRS_LIBDIR) -lnekrs-hypre -lnekrs-hypre-device -lnekrs -locca $(CC_LINKER_SLFLAG)$(NEKRS_LIBDIR)
  endif
-
+ 
  ifeq ($(ENABLE_OPENMC), yes)
+-  ADDITIONAL_LIBS += -L$(OPENMC_LIBDIR) -lopenmc -lhdf5_hl $(CC_LINKER_SLFLAG)$(OPENMC_LIBDIR)
++  ADDITIONAL_LIBS += -L$(OPENMC_LIBDIR) -luwuw -ldagmc -lpyne_dagmc -lMOAB -lopenmc -lhdf5_hl $(CC_LINKER_SLFLAG)$(OPENMC_LIBDIR)
+ endif
+ 
+ include            $(FRAMEWORK_DIR)/app.mk
