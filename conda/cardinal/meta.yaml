@@ -8,6 +8,19 @@ package:
 
 source:
   - path: ../../../cardinal
+  - path: ../../.git/modules/contrib/DAGMC
+    folder: .git/modules/contrib/DAGMC
+  - path: ../../.git/modules/contrib/openmc
+    folder: .git/modules/contrib/openmc
+  - path: ../../.git/modules/contrib/nekRS
+    folder: .git/modules/contrib/nekRS
+  - path: ../../.git/modules/contrib/moab
+    folder: .git/modules/contrib/moab
+  - path: ../../.git/modules/contrib/moose
+    folder: .git/modules/contrib/moose
+  - patches:
+      - Makefile.patch
+      - config_nekrs.patch
 
 build:
   number: {{ build }}
@@ -20,10 +33,18 @@ build:
 
 requirements:
   build:
-    - {{ cardinal_openmc }}
+    - {{ moose_libmesh }}
+    - cmake
     - pkg-config
+    - python 3.10
   run:
-    - {{ cardinal_openmc }}
+    - {{ moose_libmesh }}
+
+test:
+  requires:
+    - {{ moose_libmesh }}
+  commands:
+    - cardinal-opt --help
 
 about:
   home: https://cardinal.cels.anl.gov/index.html

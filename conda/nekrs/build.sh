@@ -7,7 +7,7 @@ export NEKRS_HOME=${PREFIX}/cardinal/contrib
 export HDF5_ROOT=${PETSC_DIR}
 
 # gslib: has some sort of issue with Condas PREFIX
-export BUILD_PREFIX=${PREFIX}
+export NO_PREFIX=${PREFIX}
 unset PREFIX
 
 mkdir build; cd build
@@ -22,7 +22,7 @@ cmake -DCMAKE_INSTALL_PREFIX=${NEKRS_HOME} \
 make -j ${MOOSE_JOBS}
 
 # gslib: Put it back...
-export PREFIX=${BUILD_PREFIX}
+export PREFIX=${NO_PREFIX}
 make install
 
 # Set NEKRS_* environment variable(s)
