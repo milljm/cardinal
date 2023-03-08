@@ -1,5 +1,5 @@
 diff --git a/Makefile b/Makefile
-index c0810933..d939a7c5 100644
+index c0810933..9132bd57 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -281,15 +281,6 @@ endif
@@ -18,7 +18,7 @@ index c0810933..d939a7c5 100644
  export LIBS := $(libmesh_LIBS)
  
  export CARDINAL_DIR
-@@ -351,11 +342,11 @@ endif
+@@ -351,13 +342,16 @@ endif
  ADDITIONAL_LIBS := -L$(CARDINAL_DIR)/lib $(CC_LINKER_SLFLAG)$(CARDINAL_DIR)/lib
  
  ifeq ($(ENABLE_NEK), yes)
@@ -31,4 +31,9 @@ index c0810933..d939a7c5 100644
 +  ADDITIONAL_LIBS += -L$(OPENMC_LIBDIR) -luwuw -ldagmc -lpyne_dagmc -lMOAB -lopenmc -lhdf5_hl $(CC_LINKER_SLFLAG)$(OPENMC_LIBDIR)
  endif
  
++# Need correct libpng16 used by libmesh-vtk package
++ADDITIONAL_LIBS += -L$(PETSC_DIR)/lib -lpng16
++
  include            $(FRAMEWORK_DIR)/app.mk
+ 
+ # app_objects are defined in moose.mk and built according to the rules in build.mk
